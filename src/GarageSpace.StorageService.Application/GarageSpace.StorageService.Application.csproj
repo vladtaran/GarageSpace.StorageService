@@ -3,4 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageSpace.StorageService.Application</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GarageSpace.StorageService.Domain\GarageSpace.StorageService.Domain.csproj" />
+  </ItemGroup>
 </Project>

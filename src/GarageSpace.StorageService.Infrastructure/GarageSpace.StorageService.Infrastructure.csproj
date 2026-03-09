@@ -10,8 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\GarageSpace.StorageProcessor.Domain\GarageSpace.StorageProcessor.Domain.csproj" />
-		<ProjectReference Include="..\GarageSpace.StorageProcessor.Application\GarageSpace.StorageProcessor.Application.csproj" />
+		<ProjectReference Include="..\GarageSpace.StorageService.Domain\GarageSpace.StorageService.Domain.csproj" />
+		<ProjectReference Include="..\GarageSpace.StorageService.Application\GarageSpace.StorageService.Application.csproj" />
 		<ProjectReference Include="..\GarageSpace.StorageService.Domain\GarageSpace.StorageService.Domain.csproj" />
 	</ItemGroup>
 
