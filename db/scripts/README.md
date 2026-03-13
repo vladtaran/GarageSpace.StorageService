@@ -18,17 +18,70 @@ Execute the scripts **in order** against your local SQL Server instance.
 ### Option A – SQL Server Management Studio (SSMS)
 
 1. Open SSMS and connect to `localhost` (or `localhost,1433`).
-2. Open each file and run it (F5):
+2. Open each file and run it (**F5** or the **Execute** toolbar button):
    ```
    01_create_database.sql
    02_create_user.sql
    ```
 
-### Option B – `sqlcmd`
+### Option B – Azure Data Studio
+
+Azure Data Studio is a lightweight, cross-platform alternative to SSMS.
+
+1. Connect to `localhost` using the **New Connection** panel.
+2. **File → Open File** and select each script in order.
+3. Click **Run** (or press **F5**).
+
+### Option C – VS Code with the mssql extension
+
+1. Install the [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) extension.
+2. Open a script file, then click **Run Query** in the top-right toolbar (or **Ctrl+Shift+E**).
+3. When prompted, select or create a connection profile pointing to `localhost`.
+
+### Option D – `sqlcmd` (command line, Windows / Linux / macOS)
+
+Run from the repository root:
 
 ```bash
 sqlcmd -S localhost -U sa -P "<sa_password>" -i db/scripts/01_create_database.sql
 sqlcmd -S localhost -U sa -P "<sa_password>" -i db/scripts/02_create_user.sql
+```
+
+`sqlcmd` is available standalone via the
+[mssql-tools](https://learn.microsoft.com/sql/linux/sql-server-linux-setup-tools) package or
+is bundled with SQL Server on Windows.
+
+### Option E – PowerShell (`Invoke-Sqlcmd`)
+
+`Invoke-Sqlcmd` is part of the **SqlServer** PowerShell module (works on Windows, macOS, and Linux).
+
+```powershell
+# Install the module once (if not already installed)
+Install-Module SqlServer -Scope CurrentUser
+
+Invoke-Sqlcmd -ServerInstance localhost -Username sa -Password "<sa_password>" `
+    -InputFile "db/scripts/01_create_database.sql"
+
+Invoke-Sqlcmd -ServerInstance localhost -Username sa -Password "<sa_password>" `
+    -InputFile "db/scripts/02_create_user.sql"
+```
+
+### Option F – Docker exec (SQL Server running in a container)
+
+If your local SQL Server runs in Docker, copy the scripts into the container and use the
+bundled `sqlcmd`:
+
+```bash
+docker cp db/scripts/01_create_database.sql <container_name>:/tmp/
+docker cp db/scripts/02_create_user.sql      <container_name>:/tmp/
+
+docker exec -it <container_name> \
+    /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "<sa_password>" \
+    -i /tmp/01_create_database.sql
+
+docker exec -it <container_name> \
+    /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "<sa_password>" \
+    -i /tmp/02_create_user.sql
 ```
 
 ---
