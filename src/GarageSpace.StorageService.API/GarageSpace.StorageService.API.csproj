@@ -5,6 +5,7 @@
 		<AssemblyName>GarageSpace.StorageService.API</AssemblyName>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<UserSecretsId>b698059f-768e-48d2-90da-0f4f130dfbb3</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
